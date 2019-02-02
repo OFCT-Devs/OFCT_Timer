@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OFCT timer Display</title>
+    <!--<script src="textFit.js"></script>-->
+</head>
+<body>
+<style>
+    body {
+        /*background-color: black;*/
+    }
+
+    .titleDiv {
+        margin: 0px;
+        width: 480px;
+        height: 80px;
+        margin-top: 5px;
+
+        text-align: center;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        display:-webkit-flex;
+        -webkit-align-item;center;
+        -webkit-justify-content:center;
+    }
+
+    .titleDiv > div{
+        float: left;
+    }
+
+    .title {
+        font-family: "Product Sans", "나눔스퀘어라운드", sans-serif;
+        font-size: 70px;
+        text-align: center;
+        line-height: 80px;
+        color: #ffffff;
+        text-shadow: 0px 0px 7px #000000;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .time {
+        font-family: "Product Sans", "나눔스퀘어라운드", sans-serif;
+        font-size: 300px;
+        text-align: center;
+        vertical-align: middle;
+        align-content: center;
+        color: #ffffff;
+        line-height: 270px;
+        width: 480px;
+        height: 280px;
+        text-shadow: 0px 0px 7px #000000;
+    }
+</style>
+<div id="title" class="titleDiv">
+    <div id="redTeam" class="title" style="color: #e53935">gsg</div>
+    <div id="titleText" class="title">rezh</div>
+    <div id="blueTeam" class="title" style="color: #1976d2">drhj</div>
+</div>
+<div id="timeLeft" class="time"></div>
+
+<script>
+
+    function readTextFile(file) {
+        var returnText = new String();
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", file, false);
+        rawFile.onreadystatechange = function () {
+            if (rawFile.readyState === 4) {
+                if (rawFile.status === 200 || rawFile.status == 0) {
+                    var allText = rawFile.responseText;
+                    returnText = allText;
+                }
+            }
+        };
+        rawFile.send(null);
+        return returnText;
+    }
+
+    function update() {
+        document.getElementById("timeLeft").innerHTML = readTextFile("./time.txt");
+        document.getElementById("titleText").innerHTML = readTextFile("./timerTitle.txt");
+        document.getElementById("redTeam").innerHTML = readTextFile("./redTitle.txt");
+        document.getElementById("blueTeam").innerHTML = readTextFile("./blueTitle.txt");
+        //textFit(document.getElementById("timeleft")), {minFontSize: 10, maxFontSize: 300};
+    }
+
+    setInterval(update, 500);
+</script>
+</body>
+</html>
