@@ -79,25 +79,25 @@ def textCheck(loopCheck):
             if loopCheck:
                 return True
             resetText()
-            pick(True)
+            pick(False)
 
         if "<" + matchRefs[i] + ">\t!mp timer 90 pb" in logTextToCheck:
             if loopCheck:
                 return True
             resetText()
-            pick(False)
+            pick(True)
 
         if "<" + matchRefs[i] + ">\t!mp timer 120 br" in logTextToCheck:
             if loopCheck:
                 return True
             resetText()
-            ban(True)
+            ban(False)
 
         if "<" + matchRefs[i] + ">\t!mp timer 120 bb" in logTextToCheck:
             if loopCheck:
                 return True
             resetText()
-            ban(False)
+            ban(True)
 
         else:
             if "<" + matchRefs[i] + ">\t!mp timer " in logTextToCheck:
