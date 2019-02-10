@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>MainWindow</class>
+    <widget class="QMainWindow" name="MainWindow">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>360</width>
+                <height>580</height>
+            </rect>
+        </property>
+        <property name="windowTitle">
+            <string>MainWindow</string>
+        </property>
+        <property name="tabShape">
+            <enum>QTabWidget::Rounded</enum>
+        </property>
+        <widget class="QWidget" name="centralwidget">
+            <widget class="QWidget" name="widget" native="true">
+                <property name="geometry">
+                    <rect>
+                        <x>20</x>
+                        <y>20</y>
+                        <width>320</width>
+                        <height>240</height>
+                    </rect>
+                </property>
+                <property name="autoFillBackground">
+                    <bool>false</bool>
+                </property>
+                <widget class="QLabel" name="displayTitle">
+                    <property name="geometry">
+                        <rect>
+                            <x>0</x>
+                            <y>20</y>
+                            <width>321</width>
+                            <height>31</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>나눔스퀘어 Bold</family>
+                            <pointsize>28</pointsize>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>로스터</string>
+                    </property>
+                    <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                    </property>
+                </widget>
+                <widget class="QLabel" name="displayTime">
+                    <property name="geometry">
+                        <rect>
+                            <x>0</x>
+                            <y>70</y>
+                            <width>321</width>
+                            <height>151</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>Product Sans</family>
+                            <pointsize>130</pointsize>
+                            <weight>50</weight>
+                            <bold>false</bold>
+                            <underline>false</underline>
+                            <strikeout>false</strikeout>
+                            <kerning>true</kerning>
+                        </font>
+                    </property>
+                    <property name="layoutDirection">
+                        <enum>Qt::LeftToRight</enum>
+                    </property>
+                    <property name="lineWidth">
+                        <number>0</number>
+                    </property>
+                    <property name="text">
+                        <string>72</string>
+                    </property>
+                    <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                    </property>
+                </widget>
+                <widget class="QGraphicsView" name="displayBackground">
+                    <property name="geometry">
+                        <rect>
+                            <x>0</x>
+                            <y>0</y>
+                            <width>321</width>
+                            <height>241</height>
+                        </rect>
+                    </property>
+                </widget>
+                <zorder>displayBackground</zorder>
+                <zorder>displayTitle</zorder>
+                <zorder>displayTime</zorder>
+            </widget>
+            <widget class="QWidget" name="horizontalLayoutWidget">
+                <property name="geometry">
+                    <rect>
+                        <x>30</x>
+                        <y>290</y>
+                        <width>131</width>
+                        <height>39</height>
+                    </rect>
+                </property>
+                <layout class="QHBoxLayout" name="mpGroup">
+                    <item>
+                        <widget class="QLabel" name="mpLabel">
+                            <property name="sizePolicy">
+                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                            <property name="font">
+                                <font>
+                                    <family>굴림</family>
+                                    <pointsize>12</pointsize>
+                                </font>
+                            </property>
+                            <property name="text">
+                                <string>#mp_</string>
+                            </property>
+                        </widget>
+                    </item>
+                    <item>
+                        <widget class="QLineEdit" name="mpNumber">
+                            <property name="sizePolicy">
+                                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                        </widget>
+                    </item>
+                </layout>
+            </widget>
+            <widget class="QCheckBox" name="manualMode">
+                <property name="geometry">
+                    <rect>
+                        <x>170</x>
+                        <y>300</y>
+                        <width>171</width>
+                        <height>16</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>Manual mode/Ignore IRC</string>
+                </property>
+            </widget>
+            <widget class="QGroupBox" name="modeBox">
+                <property name="geometry">
+                    <rect>
+                        <x>30</x>
+                        <y>340</y>
+                        <width>111</width>
+                        <height>131</height>
+                    </rect>
+                </property>
+                <property name="title">
+                    <string>Mode</string>
+                </property>
+                <widget class="QRadioButton" name="rad_mode_pick">
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>40</y>
+                            <width>90</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Pick</string>
+                    </property>
+                </widget>
+                <widget class="QRadioButton" name="rad_mode_ban">
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>60</y>
+                            <width>90</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Ban</string>
+                    </property>
+                </widget>
+                <widget class="QRadioButton" name="rad_mode_roaster">
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>80</y>
+                            <width>90</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Roaster</string>
+                    </property>
+                </widget>
+                <widget class="QWidget" name="horizontalLayoutWidget_2">
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>100</y>
+                            <width>91</width>
+                            <height>22</height>
+                        </rect>
+                    </property>
+                    <layout class="QHBoxLayout" name="customModeGroup">
+                        <item>
+                            <widget class="QRadioButton" name="rad_mode_custom">
+                                <property name="text">
+                                    <string/>
+                                </property>
+                            </widget>
+                        </item>
+                        <item>
+                            <widget class="QLineEdit" name="customMode"/>
+                        </item>
+                    </layout>
+                </widget>
+                <widget class="QRadioButton" name="rad_mod_idle">
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>20</y>
+                            <width>90</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Idle</string>
+                    </property>
+                </widget>
+            </widget>
+            <widget class="QGroupBox" name="teamBox">
+                <property name="geometry">
+                    <rect>
+                        <x>150</x>
+                        <y>340</y>
+                        <width>91</width>
+                        <height>131</height>
+                    </rect>
+                </property>
+                <property name="title">
+                    <string>Team</string>
+                </property>
+                <widget class="QRadioButton" name="rad_team_red">
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>20</y>
+                            <width>90</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Red</string>
+                    </property>
+                </widget>
+                <widget class="QRadioButton" name="rad_team_blue">
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>60</y>
+                            <width>90</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Blue</string>
+                    </property>
+                </widget>
+                <widget class="QRadioButton" name="rad_team_noTeam">
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>100</y>
+                            <width>90</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>NoTeam</string>
+                    </property>
+                </widget>
+            </widget>
+            <widget class="QGroupBox" name="timeBox">
+                <property name="geometry">
+                    <rect>
+                        <x>250</x>
+                        <y>340</y>
+                        <width>81</width>
+                        <height>131</height>
+                    </rect>
+                </property>
+                <property name="title">
+                    <string>Time</string>
+                </property>
+                <widget class="QSpinBox" name="timeSpinner">
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>50</y>
+                            <width>61</width>
+                            <height>41</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>굴림</family>
+                            <pointsize>18</pointsize>
+                        </font>
+                    </property>
+                    <property name="maximum">
+                        <number>999</number>
+                    </property>
+                </widget>
+            </widget>
+            <widget class="QWidget" name="horizontalLayoutWidget_3">
+                <property name="geometry">
+                    <rect>
+                        <x>30</x>
+                        <y>480</y>
+                        <width>301</width>
+                        <height>31</height>
+                    </rect>
+                </property>
+                <layout class="QHBoxLayout" name="afterTimerGroup">
+                    <item>
+                        <widget class="QLabel" name="afterTimerLabel">
+                            <property name="text">
+                                <string>After timer :</string>
+                            </property>
+                        </widget>
+                    </item>
+                    <item>
+                        <widget class="QLineEdit" name="afterTimerMessage"/>
+                    </item>
+                </layout>
+            </widget>
+            <widget class="QWidget" name="horizontalLayoutWidget_4">
+                <property name="geometry">
+                    <rect>
+                        <x>90</x>
+                        <y>530</y>
+                        <width>241</width>
+                        <height>31</height>
+                    </rect>
+                </property>
+                <layout class="QHBoxLayout" name="controlBox">
+                    <item>
+                        <widget class="QPushButton" name="resetButton">
+                            <property name="text">
+                                <string>Reset</string>
+                            </property>
+                        </widget>
+                    </item>
+                    <item>
+                        <widget class="QPushButton" name="abortButton">
+                            <property name="text">
+                                <string>Abort</string>
+                            </property>
+                        </widget>
+                    </item>
+                    <item>
+                        <widget class="QPushButton" name="setButton">
+                            <property name="text">
+                                <string>Set!</string>
+                            </property>
+                        </widget>
+                    </item>
+                </layout>
+            </widget>
+        </widget>
+    </widget>
+    <resources/>
+    <connections/>
+</ui>
