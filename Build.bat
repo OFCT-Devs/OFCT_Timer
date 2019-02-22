@@ -1,3 +1,1 @@
-pyinstaller --noconfirm --log-level=WARN ^
-    --onefile ^
-    myscript.spec
+pyinstaller --onefile ./Main.py

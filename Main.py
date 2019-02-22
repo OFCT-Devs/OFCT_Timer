@@ -29,154 +29,10 @@ defaultTitle = input("타이머 기본 텍스트를 입력해 주세요 : ")
 mpNumber = input("mp 번호를 입력해 주세요 : ")
 
 logFileDestination = folderPath + "logs\\" + servername + "\\#mp_" + mpNumber + ".log"
+
+
 # logFileDestination = folderPath + "logs\\" + servername + "\\test.log"
 # logFileDestination = folderPath+"logs\\"+servername+"\\#osu.log"
-
-try:
-    logFile = open(logFileDestination, "r", encoding="UTF8")
-    previousLogTextLen = len(logFile.read())
-except FileNotFoundError:
-    print("방 번호가 잘못되었거나, HexChat에서 방에 접속하지 않았습니다. 다시 확인해주세요.")
-    time.sleep(5)
-    exit()
-
-
-def textCheck(loopCheck):
-    global previousLogTextLen
-    global logFile
-    global logTextToCheck
-    global matchRefs
-
-    logFile = open(logFileDestination, "r", encoding="UTF8")
-    logTextToCheck = logFile.read()[previousLogTextLen:]
-    logFile.close()
-
-    if not loopCheck:
-        previousLogTextLen = previousLogTextLen + len(logTextToCheck)
-
-    print(logTextToCheck)
-    global reset
-
-    if "\t!mp addref " in logTextToCheck:
-        refereeNick = logTextToCheck[logTextToCheck.find("!mp addref ") + 11:]
-        if not logTextToCheck.find("\n", logTextToCheck.find("\t!mp addref ")) == -1:
-            refereeNick = logTextToCheck[logTextToCheck.find("!mp addref ") + 11:logTextToCheck.find("\n",
-                                                                                                     logTextToCheck.find(
-                                                                                                         "\t!mp addref "))]
-        refereeNick.replace("\n", "")
-        matchRefs.append(refereeNick)
-        print(matchRefs)
-        print("Added " + refereeNick + " to referees")
-
-    for i in range(len(matchRefs)):
-        if "<" + matchRefs[i] + ">\t!mp timer 90 r" in logTextToCheck:
-            if loopCheck:
-                return True
-            resetText()
-            roster()
-
-        if "<" + matchRefs[i] + ">\t!mp timer 90 pr" in logTextToCheck:
-            if loopCheck:
-                return True
-            resetText()
-            pick(False)
-
-        if "<" + matchRefs[i] + ">\t!mp timer 90 pb" in logTextToCheck:
-            if loopCheck:
-                return True
-            resetText()
-            pick(True)
-
-        if "<" + matchRefs[i] + ">\t!mp timer 120 br" in logTextToCheck:
-            if loopCheck:
-                return True
-            resetText()
-            ban(False)
-
-        if "<" + matchRefs[i] + ">\t!mp timer 120 bb" in logTextToCheck:
-            if loopCheck:
-                return True
-            resetText()
-            ban(True)
-
-        else:
-            if "<" + matchRefs[i] + ">\t!mp timer " in logTextToCheck:
-                try:
-                    customText = logTextToCheck[logTextToCheck.find("<" + matchRefs[i] + ">\t!mp timer "):]
-                    customText = customText.split("\n")[0]
-                    customText = customText.split(" ", 3)
-                    customTime = int(customText[2])
-                    customText = customText[3]
-
-                    if customText.startswith("`"):
-                        if loopCheck:
-                            return True
-                        resetText()
-                        customText = customText[1:]
-                        titleWrite(customText)
-                        timer(customTime)
-                except ValueError:
-                    print("입력값에 오류가 있습니다.")
-
-        if "<" + matchRefs[i] + ">\t!mp aborttimer" in logTextToCheck:
-            if loopCheck:
-                return True
-            resetText()
-
-        if "<" + matchRefs[i] + ">\t`reset" in logTextToCheck:
-            if loopCheck:
-                return True
-            resetText()
-
-
-def roster():
-    titleWrite("로스터")
-    redWrite("")
-    blueWrite("")
-    timer(90)
-
-
-def pick(team):
-    titleWrite("픽")
-
-    if team:
-        redWrite("Red")
-    if not team:
-        blueWrite("Blue")
-    timer(90)
-
-
-def ban(team):
-    titleWrite("밴")
-
-    if team:
-        redWrite("Red")
-    if not team:
-        blueWrite("Blue")
-    timer(120)
-
-
-def timer(setTime):
-    for i in range(setTime + 1):
-        timeWrite(str(setTime - i))
-        if textCheck(True):
-            print("timer canceled")
-            textCheck(False)
-            return
-        time.sleep(1)
-
-    titleWrite("타이머 종료")
-    redWrite("")
-    blueWrite("")
-
-    for i in range(20):
-        time.sleep(0.5)
-        if textCheck(True):
-            textCheck(False)
-            return
-
-    resetText()
-
 
 def titleWrite(text):
     titleFile = open("./timerTitle.txt", "w", encoding="UTF8")
@@ -209,6 +65,194 @@ def resetText():
     timeWrite("")
 
 
+def roster():
+    titleWrite("로스터")
+    redWrite("")
+    blueWrite("")
+    timer(90)
+
+
+def pick(team):
+    titleWrite("픽")
+
+    if team:
+        redWrite("Red")
+    if not team:
+        blueWrite("Blue")
+    timer(90)
+
+
+def ban(team):
+    titleWrite("밴")
+
+    if team:
+        redWrite("Red")
+    if not team:
+        blueWrite("Blue")
+    timer(120)
+
+
+try:
+    logFile = open(logFileDestination, "r", encoding="UTF8")
+    previousLogTextLen = len(logFile.read())
+    titleWrite(defaultTitle)
+except FileNotFoundError:
+    print("방 번호가 잘못되었거나, HexChat에서 방에 접속하지 않았습니다. 다시 확인해주세요.")
+    time.sleep(5)
+    exit()
+
+
+def textCheck(loopCheck):
+    global previousLogTextLen
+    global logFile
+    global logTextToCheck
+    global matchRefs
+
+    logFile = open(logFileDestination, "r", encoding="UTF8")
+    logTextToCheck = logFile.read()[previousLogTextLen:]
+    logFile.close()
+
+    if not loopCheck:
+        previousLogTextLen = previousLogTextLen + len(logTextToCheck)
+        print(logTextToCheck)
+
+    logTextToCheck = logTextToCheck.splitlines()
+
+    for line in range(len(logTextToCheck)):
+        if "\t!mp addref " in logTextToCheck[line] or "\t`addref " in logTextToCheck[line]:
+            refereeNick = ""
+            if "\t!mp addref " in logTextToCheck[line]:
+                refereeNick = logTextToCheck[line][logTextToCheck[line].find("!mp addref ") + 11:]
+            if "\t`addref " in logTextToCheck[line]:
+                refereeNick = logTextToCheck[line][logTextToCheck[line].find("`addref ") + 8:]
+            matchRefs.append(refereeNick)
+            print(matchRefs)
+            print("Added " + refereeNick + " to referees")
+
+        for i in range(len(matchRefs)):
+            if "<" + matchRefs[i] + ">\t`" in logTextToCheck[line] or "<" + matchRefs[i] + ">\t!mp" in logTextToCheck[
+                line]:
+                if "\t`" in logTextToCheck[line]:
+                    command = logTextToCheck[line][logTextToCheck[line].find("\t`") + 2:]
+                if "\t!mp " in logTextToCheck[line]:
+                    command = logTextToCheck[line][logTextToCheck[line].find("\t!mp ") + 5:]
+
+                if not loopCheck:
+                    print(command)
+
+                flag = True
+
+                if "timer 90 r" in command:
+                    if loopCheck:
+                        return True
+                    flag = False
+                    resetText()
+                    roster()
+
+                if "timer 90 pr" in command:
+                    if loopCheck:
+                        return True
+                    flag = False
+                    resetText()
+                    pick(False)
+
+                if "timer 90 pb" in command:
+                    if loopCheck:
+                        return True
+                    flag = False
+                    resetText()
+                    pick(True)
+
+                if "timer 120 br" in command:
+                    if loopCheck:
+                        return True
+                    flag = False
+                    resetText()
+                    ban(False)
+
+                if "timer 120 bb" in command:
+                    if loopCheck:
+                        return True
+                    flag = False
+                    resetText()
+                    ban(True)
+
+                else:
+                    if "timer " in command and flag == True:
+                        try:
+                            if loopCheck:
+                                return True
+                            customText = command[command.find("timer ") + 6:]
+                            if not " " in customText:
+                                customTime = int(customText)
+                                resetText()
+                                titleWrite("타이머")
+                                timer(customTime)
+                            if " " in customText:
+                                customText = customText.split(" ", 1)
+                                customTime = int(customText[0])
+                                customText = customText[1]
+                                resetText()
+                                titleWrite(customText)
+                                timer(customTime)
+                        except ValueError:
+                            print("입력값에 오류가 있습니다.")
+                        except IndexError:
+                            print("배열 인덱스 값 오류.")
+
+                if "aborttimer" in command:
+                    if loopCheck:
+                        return True
+                    resetText()
+
+                if "text " in command:
+                    try:
+                        if loopCheck:
+                            return True
+                        customTitle = command[command.find("text ") + 5:]
+                        resetText()
+                        titleWrite(customTitle)
+                    except ValueError:
+                        print("입력값에 오류가 있습니다.")
+
+                if "dt " in command:
+                    try:
+                        if loopCheck:
+                            previousLogTextLen = previousLogTextLen + len(logTextToCheck[line])
+                        global defaultTitle
+                        print(command)
+                        defaultTitle = command[command.find("dt ") + 3:]
+                    except ValueError:
+                        print("입력값에 오류가 있습니다.")
+
+                if "reset" in command:
+                    if loopCheck:
+                        return True
+                    resetText()
+
+
+def timer(setTime):
+    for i in range(setTime + 1):
+        timeWrite(str(setTime - i))
+        if textCheck(True):
+            print("timer canceled")
+            textCheck(False)
+            return
+        time.sleep(1)
+
+    titleWrite("타이머 종료")
+    redWrite("")
+    blueWrite("")
+
+    for i in range(20):
+        time.sleep(0.5)
+        if textCheck(True):
+            textCheck(False)
+            return
+
+    resetText()
+
+
 class MyHandler(FileSystemEventHandler):
     def on_modified(self, event):
         textCheck(False)
@@ -225,4 +269,4 @@ if __name__ == "__main__":
             time.sleep(1)
     except KeyboardInterrupt:
         observer.stop()
-    # observer.join()
+    observer.join()
