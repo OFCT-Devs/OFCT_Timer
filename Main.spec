@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['Main.py'],
-             pathex=['D:\\Games\\OFCT\\201901_5\\OFCTtimer'],
+             pathex=['D:\\Games\\OFCT\\Projects\\OFCTtimer'],
              binaries=[],
              datas=[],
              hiddenimports=[],
