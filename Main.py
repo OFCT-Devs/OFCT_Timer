@@ -154,28 +154,28 @@ def textCheck(loopCheck):
                         return True
                     flag = False
                     resetText()
-                    pick(False)
+                    pick(True)
 
                 if "timer 90 pb" in command:
                     if loopCheck:
                         return True
                     flag = False
                     resetText()
-                    pick(True)
+                    pick(False)
 
                 if "timer 120 br" in command:
                     if loopCheck:
                         return True
                     flag = False
                     resetText()
-                    ban(False)
+                    ban(True)
 
                 if "timer 120 bb" in command:
                     if loopCheck:
                         return True
                     flag = False
                     resetText()
-                    ban(True)
+                    ban(False)
 
                 else:
                     if "timer " in command and flag == True:
