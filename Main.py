@@ -35,25 +35,25 @@ logFileDestination = folderPath + "logs\\" + servername + "\\#mp_" + mpNumber + 
 # logFileDestination = folderPath+"logs\\"+servername+"\\#osu.log"
 
 def titleWrite(text):
-    titleFile = open("./timerTitle.txt", "w", encoding="UTF8")
+    titleFile = open("./Sources/timerTitle.txt", "w", encoding="UTF8")
     titleFile.write(text)
     titleFile.close()
 
 
 def timeWrite(text):
-    timeFile = open("./time.txt", "w", encoding="UTF8")
+    timeFile = open("./Sources/time.txt", "w", encoding="UTF8")
     timeFile.write(text)
     timeFile.close()
 
 
 def redWrite(text):
-    redFile = open("./redTitle.txt", "w", encoding="UTF8")
+    redFile = open("./Sources/redTitle.txt", "w", encoding="UTF8")
     redFile.write(text)
     redFile.close()
 
 
 def blueWrite(text):
-    blueFile = open("./blueTitle.txt", "w", encoding="UTF8")
+    blueFile = open("./Sources/blueTitle.txt", "w", encoding="UTF8")
     blueFile.write(text)
     blueFile.close()
 
